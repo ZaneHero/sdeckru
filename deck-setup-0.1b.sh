@@ -68,7 +68,7 @@ echo "Установка Protonupqt"
 flatpak install flathub net.davidotek.pupgui2
 echo "Запуск Protonupqt"
 flatpak run net.davidotek.pupgui2
-echo "Установите последнюю версию Protonupqt"
+echo "Установите последнюю версию Proton GE в графическом меню protonupqt"
 echo "Скрипт установки lutris + protonupqtуспешно выполнен!"
 }
 
