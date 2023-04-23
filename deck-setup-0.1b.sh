@@ -20,24 +20,19 @@ echo "█▀▄ █▄█   █▄▄ █▄█ █▄▄ █▀█�
 function action_one() {
 echo "Установка русской локали"
 temp_file=$(mktemp)
-
 # Проверяем наличие файла /etc/locale.gen
 if [ -f /etc/locale.gen ]; then
     # Читаем файл /etc/locale.gen и удаляем символ "#" перед строками "ru_RU.UTF-8" и "en_US.UTF-8", сохраняем результат во временном файле
     sed -e 's/^#\(.*ru_RU\.UTF-8\)/\1/' -e 's/^#\(.*en_US\.UTF-8\)/\1/' /etc/locale.gen > "$temp_file"
-
     # Заменяем оригинальный файл /etc/locale.gen на измененный файл
     sudo mv "$temp_file" /etc/locale.gen
 else
     echo "Файл /etc/locale.gen не найден."
 fi
-
 echo "Обновляем glbic..."
 sudo pacman -Syu glibc
 sudo locale-gen
-
 temp_file1=$(mktemp)
-
 # Проверяем наличие файла /etc/locale.conf
 if [ -f /etc/locale.conf ]; then
     # Заменяем "LANG=en_US.UTF-8" на "LANG=ru_RU.UTF-8" и сохраняем результат во временном файле
@@ -48,12 +43,10 @@ if [ -f /etc/locale.conf ]; then
 else
     echo "Файл /etc/locale.conf не найден."
 fi
-
 sudo localectl set-locale ru_RU.UTF-8
 sudo rm ~/.config/plasma-localerc
 echo "Скрипт смены локали успешно выполнен!"
 }
-
 
 function action_two() {
 echo "Установка Lutris"
@@ -63,7 +56,6 @@ flatpak install flathub org.gnome.Platform.Compat.i386//44
 flatpak install org.freedesktop.Platform.GL32.default//21.08
 flatpak install org.freedesktop.Platform.GL.default//21.08
 flatpak install flathub-beta net.lutris.Lutris
-
 echo "Установка Protonupqt"
 flatpak install flathub net.davidotek.pupgui2
 echo "Запуск Protonupqt"
@@ -80,9 +72,11 @@ sudo pacman-key --init
 echo "Заполнение ключей Arch Linux..."
 sudo pacman-key --populate archlinux
 }
+
 function action_make() {
 sudo steamos-readonly enable
 }
+
 # Отображаем меню выбора
 echo "Выберите действие:"
 echo "1) Установка русской локали"
