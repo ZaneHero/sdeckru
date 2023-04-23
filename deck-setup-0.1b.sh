@@ -19,15 +19,6 @@ echo "█▀▄ █▄█   █▄▄ █▄█ █▄▄ █▀█�
 
 function action_one() {
 echo "Установка русской локали"
-echo "Отключаем защиту от записи в SteamOS..."
-sudo steamos-readonly disable
-echo "Инициализация ключей Pacman..."
-sudo pacman-key --init
-echo "Заполнение ключей Arch Linux..."
-sudo pacman-key --populate archlinux
-
-echo "Установка lutris+proton qt менеджера"
-
 temp_file=$(mktemp)
 
 # Проверяем наличие файла /etc/locale.gen
@@ -66,14 +57,6 @@ echo "Скрипт смены локали успешно выполнен!"
 
 function action_two() {
 echo "Установка Lutris"
-
-echo "Отключаем защиту от записи в SteamOS..."
-sudo steamos-readonly disable
-echo "Инициализация ключей Pacman..."
-sudo pacman-key --init
-echo "Заполнение ключей Arch Linux..."
-sudo pacman-key --populate archlinux
-
 flatpak remote-add flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
 flatpak update --appstream
 flatpak install flathub org.gnome.Platform.Compat.i386//44 
@@ -89,16 +72,17 @@ echo "Установите последнюю версию Protonupqt"
 echo "Скрипт установки lutris + protonupqtуспешно выполнен!"
 }
 
-
-function action_three() {
-    echo "Установка русской локали + lutris+proton qt менеджера"
-    action_one
-    action_two
-
+function action_remove() {
+echo "Отключаем защиту от записи в SteamOS..."
+sudo steamos-readonly disable
+echo "Инициализация ключей Pacman..."
+sudo pacman-key --init
+echo "Заполнение ключей Arch Linux..."
+sudo pacman-key --populate archlinux
 }
-
-
-
+function action_make() {
+sudo steamos-readonly enable
+}
 # Отображаем меню выбора
 echo "Выберите действие:"
 echo "1) Установка русской локали"
@@ -112,13 +96,21 @@ read -p "Введите номер действия: " choice
 # Выполняем соответствующее действие или выходим
 case $choice in
     1)
+        action_remove
         action_one
+        action_make
         ;;
     2)
+        action_remove
         action_two
+        action_make
         ;;
     3)
-        action_three
+        echo "Установка русской локали + lutris+proton qt менеджера"
+        action_remove
+        action_one
+        action_two
+        action_make
         ;;
     0)
         echo "Выход..."
