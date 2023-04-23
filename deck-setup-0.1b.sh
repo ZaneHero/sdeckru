@@ -42,7 +42,6 @@ else
     echo "Файл /etc/locale.gen не найден."
 fi
 
-
 echo "Обновляем glbic..."
 sudo pacman -Syu glibc
 sudo locale-gen
@@ -63,17 +62,17 @@ fi
 sudo localectl set-locale ru_RU.UTF-8
 sudo rm ~/.config/plasma-localerc
 
-
 }
 
 
 function action_two() {
 
-
-
-
-
-
+flatpak remote-add flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
+flatpak update --appstream
+flatpak install flathub org.gnome.Platform.Compat.i386//44 
+flatpak install org.freedesktop.Platform.GL32.default//21.08
+flatpak install org.freedesktop.Platform.GL.default//21.08
+flatpak install flathub-beta net.lutris.Lutris
 
 }
 
