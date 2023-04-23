@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 echo "░██████╗████████╗███████╗░█████╗░███╗░░░███╗"
 echo "██╔════╝╚══██╔══╝██╔════╝██╔══██╗████╗░████║"
 echo "╚█████╗░░░░██║░░░█████╗░░███████║██╔████╔██║"
@@ -67,6 +66,13 @@ echo "Скрипт смены локали успешно выполнен!"
 
 function action_two() {
 echo "Установка Lutris"
+
+echo "Отключаем защиту от записи в SteamOS..."
+sudo steamos-readonly disable
+echo "Инициализация ключей Pacman..."
+sudo pacman-key --init
+echo "Заполнение ключей Arch Linux..."
+sudo pacman-key --populate archlinux
 
 flatpak remote-add flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
 flatpak update --appstream
