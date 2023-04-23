@@ -61,11 +61,12 @@ fi
 
 sudo localectl set-locale ru_RU.UTF-8
 sudo rm ~/.config/plasma-localerc
-
+echo "Скрипт смены локали успешно выполнен!"
 }
 
 
 function action_two() {
+echo "Установка Lutris"
 
 flatpak remote-add flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
 flatpak update --appstream
@@ -74,12 +75,17 @@ flatpak install org.freedesktop.Platform.GL32.default//21.08
 flatpak install org.freedesktop.Platform.GL.default//21.08
 flatpak install flathub-beta net.lutris.Lutris
 
+echo "Установка Protonupqt"
+flatpak install flathub net.davidotek.pupgui2
+echo "Запуск Protonupqt"
+flatpak run net.davidotek.pupgui2
+echo "Установите последнюю версию Protonupqt"
+echo "Скрипт установки lutris + protonupqtуспешно выполнен!"
 }
 
 
 function action_three() {
     echo "Установка русской локали + lutris+proton qt менеджера"
-
     action_one
     action_two
 
@@ -116,4 +122,3 @@ case $choice in
         ;;
 esac
 
-echo "Скрипт успешно выполнен!"
